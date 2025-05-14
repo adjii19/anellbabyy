@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ANELIA</title>
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.0.0/tsparticles.min.js"></script>
+    <style>
+        @keyframes zoom-in-out {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        @keyframes typewriter {
+            from {
+                width: 0;
+            }
+
+            to {
+                width: 100%;
+            }
+        }
+
+        @keyframes blink {
+            50% {
+                border-color: transparent;
+            }
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow-y: auto;
+            /* Izinkan scroll vertikal */
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-image: url('wallpaper.jpg');
+            background-size: cover;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            padding: 40px 20px;
+            top: 35%;
+        }
+
+        .container.img-1a {
+            bottom: 100%;
+        }
+
+        .image-button {
+            position: relative;
+            left: 10%;
+            width: 160px;
+            height: 160px;
+            overflow: hidden;
+            cursor: pointer;
+            animation: zoom-in-out 3s infinite;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            margin-bottom: 10px;
+        }
+
+        .image-button img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .button-text {
+            margin-top: 20px;
+            font-size: 20px;
+            color: #333;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .scroll-image {
+            position: relative;
+            left: 50%;
+            width: 200px;
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transform: translate(-50%, -50%) translateX(500%) scale(1);
+            transition: transform 1s ease-in-out;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .scroll-image1 {
+            position: relative;
+            left: 50%;
+            width: 200px;
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transform: translate(-50%, -50%) translateX(500%) scale(1);
+            transition: transform 1s ease-in-out;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            bottom: 15%;
+        }
+
+        .scroll-image2 {
+            position: relative;
+            left: 50%;
+            width: 200px;
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transform: translate(-50%, -50%) translateX(500%) scale(1);
+            transition: transform 1s ease-in-out;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            bottom: 50%;
+        }
+
+        .scroll-image3 {
+            position: relative;
+            left: 50%;
+            width: 220px;
+            height: 220px;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transform: translate(-50%, -50%) translateX(500%) scale(1);
+            transition: transform 1s ease-in-out;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            bottom: 150%;
+            z-index: 9999;
+        }
+
+
+        .scrooll-vid {
+            position: relative;
+            left: 50%;
+            width: 200px;
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transform: translate(-50%, -50%) translateX(500%) scale(1);
+            transition: transform 1s ease-in-out;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .scroll-image.show {
+            transform: translate(-50%, -50%) translateX(0) scale(1.2);
+        }
+
+        .scroll-image1.show {
+            transform: translate(-50%, -50%) translateX(0) scale(1.2);
+        }
+
+        .scroll-image2.show {
+            transform: translate(-50%, -50%) translateX(0) scale(1.2);
+        }
+
+        .scroll-image3.show {
+            transform: translate(-50%, -50%) translateX(0) scale(1.2);
+        }
+
+
+        .typewriter {
+            position: absolute;
+            top: 60%;
+            /* Diletakkan lebih tinggi dari tombol */
+            left: 12%;
+            right: 80%;
+            transform: translateX(-50%);
+            font-size: 18px;
+            color: #333;
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 0px solid #333;
+            width: 80%;
+            animation: typewriter 5s steps(250, end) forwards, blink 1s step-end infinite;
+            text-align: left;
+            transition: opacity 0.5s ease, transform 1s ease;
+            margin: 10px;
+            max-width: 600px;
+            z-index: 5;
+        }
+
+        .typewritera-a {
+            position: absolute;
+            top: 60%;
+            /* Diletakkan lebih tinggi dari tombol */
+            left: 50%;
+            right: 20%;
+            transform: translateX(-50%);
+            font-size: 18px;
+            color: #333;
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 0px solid #333;
+            width: 80%;
+            animation: typewriter 5s steps(250, end) forwards, blink 1s step-end infinite;
+            text-align: center;
+            transition: opacity 0.5s ease, transform 1s ease;
+            margin: 10px;
+            max-width: 600px;
+            z-index: 5;
+        }
+
+
+        .gallery-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100vh;
+    overflow-y: auto;
+    padding-top: 50px; /* Untuk menjauhkan sedikit dari atas */
+}
+
+
+        .typewriter.img-2 {
+            bottom: 20px;
+            /* Lebih dekat ke bawah */
+        }
+
+        .next-button {
+            position: relative;
+            bottom: 45%;
+            /* Jarak dari bawah */
+            left: 10%;
+            transform: translateX(-50%);
+            padding: 10px 20px;
+            margin: 10px;
+            color: black;
+            border: none;
+            border-radius: 5px;
+            background-color: #ffd1dc;
+            cursor: pointer;
+            display: none;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .next-button.show {
+            display: inline-block;
+        }
+
+        .next-button1 {
+            position: relative;
+            bottom: 30%;
+            /* Jarak dari bawah */
+            left: 10%;
+            transform: translateX(-50%);
+            padding: 10px 20px;
+            margin: 10px;
+            color: black;
+            border: none;
+            border-radius: 5px;
+            background-color: #ffd1dc;
+            cursor: pointer;
+            display: none;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .next-button1.show {
+            display: inline-block;
+        }
+
+        .next-button2 {
+            position: relative;
+            bottom: 20%;
+            /* Jarak dari bawah */
+            left: 10%;
+            transform: translateX(-50%);
+            padding: 10px 20px;
+            margin: 10px;
+            color: black;
+            border: none;
+            border-radius: 5px;
+            background-color: #ffd1dc;
+            cursor: pointer;
+            display: none;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .next-button2.show {
+            display: inline-block;
+        }
+
+        .next-button3 {
+            position: relative;
+            bottom: 5%;
+            /* Jarak dari bawah */
+            left: 15%;
+            transform: translateX(-50%);
+            padding: 10px 20px;
+            margin: 10px;
+            color: black;
+            border: none;
+            border-radius: 5px;
+            background-color: #ffd1dc;
+            cursor: pointer;
+            display: none;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .next-button3.show {
+            display: inline-block;
+        }
+
+
+
+        h1 {
+            text-align: center;
+            padding: 20px;
+            color: #d63384;
+        }
+
+        .gallery {
+            display: flex;
+    flex-direction: column; /* Stack gambar ke bawah */
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+
+
+
+.photo {
+    width: 250px; /* Ukuran disesuaikan */
+    height: auto;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+
+.photo img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+
+        h1 {
+            text-align: center;
+            padding: 20px;
+            color: #d63384;
+        }
+
+        .photo img {
+            display: block;
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+
+        }
+
+        .message {
+    position: absolute;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    transform: translateY(100%);
+    transition: transform 0.4s ease;
+}
+        .photo:hover .message {
+            transform: translateY(0);
+        }
+
+        .falling-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+            /* NAIKKAN agar di atas galeri */
+        }
+
+
+        .heart {
+            position: absolute;
+            color: pink;
+            animation: fall linear infinite;
+            font-size: 20px;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+        }
+
+        .gallery.hidden {
+            opacity: 0;
+            transform: scale(0.95);
+            pointer-events: none;
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .gallery.show {
+            opacity: 1;
+            transform: scale(1);
+            pointer-events: all;
+        }
+
+        .photo:hover img {
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 600px) {
+            .photo {
+                width: 100%;
+                height: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="falling-hearts" id="hearts"></div>
+    <div id="kartu" class="gallery hidden"></div>
+    <div class="container">
+
+        <div class="image-button" onclick="handleClick(this)">
+            <img src="p.png" alt="Fading Button">
+
+        </div>
+        <div class="button-text" id="buttonText">Pencet lovee nya..!</div>
+        <div class="scroll-image" id="img-1" style="background-image: url('bubu5.gif');"></div>
+        <div class="scroll-image1" id="img-1a" style="background-image: url('bubu4.gif');"></div>
+        <div class="scroll-image2" id="img-1b" style="background-image: url('bubu2.gif');"></div>
+        <div class="scroll-image3" id="img-2" style="background-image: url('img-1.jpeg');"></div>
+    </div>
+
+
+
+    <div class="typewriter" id="typewriterText"></div>
+    <div class="typewritera-a" id="typewriterTexta"></div>
+    <button class="next-button" id="nextButton1" onclick="jangandulujangan(this)">mauu</button>
+    <button class="next-button1" id="nextButton2" onclick="sek(this)">kepoinn</button>
+    <button class="next-button2" id="nextButton3" onclick="showNextImage(this)">ciiee</button>
+    <button class="next-button3" id="nextGaleri" onclick="showGaleri(this)">cliickk sinii!!</button>
+
+
+
+
+
+    <!-- Tambahkan elemen audio -->
+    <audio id="backsound" src="Virgoun - Surat Cinta Untuk Starla (Official Lyric Video).mp3" preload="auto"></audio>
+
+    <script>
+
+
+
+        function handleClick(button) {
+
+
+            const textElement = document.getElementById("buttonText");
+            const newImage = document.getElementById("img-1");
+            const audio = document.getElementById("backsound");
+
+            button.style.opacity = '0';
+            button.style.transform = 'scale(0.5)';
+            textElement.style.opacity = '0';
+            textElement.style.transform = 'scale(0.5)';
+
+            setTimeout(() => {
+                button.style.display = 'none';
+                textElement.style.display = 'none';
+                newImage.classList.add('show');
+                audio.play();
+
+                setTimeout(() => {
+                    const typewriterText = document.getElementById("typewriterText");
+typewriterText.style.display = "block";
+typewriterText.style.opacity = "1";
+typewriterText.style.transform = "scale(1)";
+typewriterText.style.animation = "none"; // Reset animasi
+typewriterText.offsetHeight; // Trigger reflow
+typewriterText.textContent = "Mau liat pacarku yang cantik ini gak?!";
+typewriterText.style.animation = "typewriter 4s steps(80, end) forwards, blink 1s step-end infinite";
+
+                    setTimeout(() => {
+                        const nextButton = document.getElementById("nextButton1");
+                        nextButton.classList.add("show");
+                    }, 4000);
+                }, 1000);
+            }, 500);
+
+        }
+
+        function jangandulujangan(button) {
+            const img1 = document.getElementById("img-1");
+            const img1a = document.getElementById("img-1a");
+            const typewriterText = document.getElementById("typewriterText");
+            const nextButton = document.getElementById("nextButton1");
+
+            img1.style.display = "none";
+
+            typewriterText.style.opacity = '0';
+            typewriterText.style.transform = 'scale(0.5)';
+            nextButton.style.opacity = '0';
+            nextButton.style.transform = 'scale(0.5)';
+
+            setTimeout(() => {
+                typewriterText.style.display = "none";
+                nextButton.style.display = "none";
+
+                img1a.style.display = "block";
+                setTimeout(() => {
+                    img1a.classList.add("show");
+                }, 100);
+
+                setTimeout(() => {
+                    const typewriterText = document.getElementById("typewriterTexta");
+                    typewriterText.style.display = "block";
+                    typewriterText.style.opacity = "1";
+                    typewriterText.style.transform = "scale(1)";
+                    typewriterText.style.animation = "none"; // Reset animasi
+                    typewriterText.offsetHeight; // Trigger reflow
+                    typewriterText.textContent = "eeittsss kepo ya!";
+                    typewriterText.style.transform = "translateX(-50%)";
+                    typewriterText.style.animation = "typewriter 4s steps(80, end) forwards, blink 1s step-end infinite";
+                    typewriterText.classList.add("show");
+
+
+                    setTimeout(() => {
+                        const nextButton = document.getElementById("nextButton2");
+                        nextButton.classList.add("show");
+                    }, 3000)
+
+                }, 1000)
+
+            },);
+
+
+        }
+
+
+        function sek(button) {
+
+            const img1b = document.getElementById("img-1b");
+            const img1a = document.getElementById("img-1a");
+            const typewriterText = document.getElementById("typewriterTexta");
+            const nextButton = document.getElementById("nextButton2");
+            const nextButton1 = document.getElementById("nextButton3");
+
+            img1a.style.display = "none";
+
+            typewriterText.style.opacity = '0';
+            typewriterText.style.transform = 'scale(0.5)';
+            nextButton.style.opacity = '0';
+            nextButton.style.transform = 'scale(0.5)'
+
+            setTimeout(() => {
+                typewriterText.style.display = "none";
+                nextButton.style.display = "none";
+
+                img1b.style.display = "block";
+                setTimeout(() => {
+                    img1b.classList.add("show");
+                }, 100);
+
+                setTimeout(() => {
+                    const typewriterText = document.getElementById("typewriterTexta");
+                    typewriterText.style.display = "block";
+                    typewriterText.style.opacity = "1";
+                    typewriterText.style.transform = "scale(1)";
+                    typewriterText.style.animation = "none"; // Reset animasi
+                    typewriterText.offsetHeight; // Trigger reflow
+                    typewriterText.textContent = "siiiniii kiiss duluu" ;
+                    typewriterText.style.transform = "translateX(-50%)";
+                    typewriterText.style.animation = "typewriter 4s steps(80, end) forwards, blink 1s step-end infinite";
+                    typewriterText.classList.add("show");
+
+
+                    setTimeout(() => {
+                        const nextButton = document.getElementById("nextButton3");
+                        nextButton.classList.add("show");
+                    }, 3000)
+
+                }, 1000)
+
+            },);
+        }
+
+
+        function showNextImage(button) {
+
+            const img1b = document.getElementById("img-1b");
+            const img2 = document.getElementById("img-2");
+            const typewriterText = document.getElementById("typewriterTexta");
+            const nextButton = document.getElementById("nextButton3");
+            const nextButton1 = document.getElementById("nextButton");
+            const textElement = document.getElementById("nextGaleri");
+
+            // Sembunyikan img-1
+            img1b.style.display = "none";
+
+            // Memudar dan menghilangkan typewriter dan tombol Next
+            typewriterText.style.opacity = '0';
+            typewriterText.style.transform = 'scale(0.5)';
+            nextButton.style.opacity = '0';
+            nextButton.style.transform = 'scale(0.5)';
+
+            setTimeout(() => {
+                typewriterText.style.display = "none";
+                nextButton.style.display = "none";
+
+                // Tampilkan img-2 dengan efek bergulir
+                img2.style.display = "block";
+                setTimeout(() => {
+                    img2.classList.add("show");
+                }, 100);
+
+                // Tampilkan teks typewriter baru di bawah tengah gambar
+                setTimeout(() => {
+                    const typewriterText = document.getElementById("typewriterTexta");
+                    typewriterText.style.display = "block";
+                    typewriterText.style.opacity = "1";
+                    typewriterText.style.transform = "scale(1)";
+                    typewriterText.style.animation = "none"; // Reset animasi
+                    typewriterText.offsetHeight; // Trigger reflow
+                    typewriterText.textContent = "Ini dia pacarku yang cantik banget!";
+                    typewriterText.style.transform = "translateX(-50%)";
+                    typewriterText.style.animation = "typewriter 4s steps(80, end) forwards, blink 1s step-end infinite";
+                    typewriterText.classList.add("img-2"); // Tambahkan kelas untuk penyesuaian posisi
+
+
+                    setTimeout(() => {
+                        const typewriterText = document.getElementById("typewriterTexta");
+                        typewriterText.style.display = "block";
+                        typewriterText.style.opacity = "1";
+                        typewriterText.style.transform = "scale(1)";
+                        typewriterText.style.animation = "none"; // Reset animasi
+                        typewriterText.offsetHeight; // Trigger reflow
+                        typewriterText.textContent = "cantik banget kannn dan gemesinnn!!!";
+                        typewriterText.style.transform = "translateX(-50%)";
+                        typewriterText.style.animation = "typewriter 3s steps(80, end) forwards, blink 1s step-end infinite";
+                        typewriterText.classList.add("img-2");
+
+
+                        setTimeout(() => {
+                            const nextButton = document.getElementById("nextGaleri");
+                            nextButton.classList.add("show");
+                        }, 3000);
+
+                    }, 6000);
+                }, 1000);
+
+            }, 500);
+
+        }
+
+        const heartContainer = document.getElementById("hearts");
+
+
+
+
+        let kartu = document.getElementById("kartu");
+
+        function createHeart() {
+            const heart = document.createElement("div");
+            heart.classList.add("heart");
+            heart.innerHTML = "💖";
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = 2 + Math.random() * 3 + "s";
+            heart.style.fontSize = 14 + Math.random() * 20 + "px";
+            heartContainer.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
+
+
+
+
+        function showGaleri(button) {
+            const container = document.querySelector(".container");
+            const gallery = document.getElementById("kartu");
+            const typewriterText = document.getElementById("typewriterTexta");
+            const nextButton = document.getElementById("nextGaleri");
+
+            // Hide everything else
+            container.style.display = "none";
+            typewriterText.style.display = "none";
+            nextButton.style.display = "none";
+
+            // Show the gallery with a smooth effect
+            gallery.classList.remove("hidden");
+            gallery.classList.add("show");
+
+            gallery.scrollIntoView({ behavior: "smooth" });
+
+            // Optionally populate the gallery
+            gallery.innerHTML = `
+            <div class="gallery-wrapper">
+                <div class="gallery">
+                <div class="photo">
+                    <img src="img1.jpg" alt="Momen 1">
+                    <div class="message">Ciintaa yang akuu punya ke kamuu itu bukan yang biasa-biasa ajaa. Akuu cinta kamu dengan cara yang tenangg tapi dalam... kayak laut yang kelihatannya diam tapi isinya penuh kehidupann. Akuu cinta kamu nggak cuma karena kamu cantik atau baikkk, tapi karena kamu punya hatii yang bikin aku jatuh berkali-kaliii.💘</div>
+                </div>
+                <div class="photo">
+                    <img src="img4.jpg" alt="Momen 2">
+                    <div class="message">Jangan pernahh ngerasa kamu nggak cukup yaa. Karena di matakuu, kamu tuh lebih dari cukupp. Kamu tuh paket lengkap—baik, lucu, perhatian, daan selaluu bisa bikin aku jatuh cinta dari segala sisii. Pokoknya, kamuuu itu versi terbaik yang aku minta dari semestaaa xixixixi.</div>
+                </div>
+                <div class="photo">
+                    <img src="img10.jpg" alt="Momen 3">
+                    <div class="message">I LOVEE YOUU ANELLLIAA❤️</div>
+                </div>
+                <div class="photo">
+                    <img src="img6.jpg" alt="Momen 4">
+                    <div class="message">Akuu pengen kita bareng-bareng terusss. Nggak cuma buat beberapa bulan, tapi buat lamaaa. Akuu dann anelllku pengen ada di tiap momen kamu, dari yang lucu sampe yang sediihhh, dari yang gampang sampe yang ribettt. Karena buat akuu, hidup bareng kamu itu bukan beban—itu impiann.</div>
+                </div>
+                <div class="photo">
+                    <img src="img7.jpg" alt="Momen 5">
+                    <div class="message">💖💖💖💖💖</div>
+                </div>
+                <div class="photo">
+                    <img src="img8.jpg" alt="Momen 6">
+                    <div class="message">Akuu akan bersyukurr bangett jika kamuu benerr bener buat aku selamanyaa dan semogaa apa yang kitaa impikann bisaa tercapai</div>
+                </div>
+                <div class="photo">
+                    <img src="img9.jpg" alt="Momen 7">
+                    <div class="message">Terimakasihh banyaakk yaa cewweeku anell kamuu yangg buatt hari hariiku penuhh dengan muu🤍🤍🤍</div>
+                </div>
+                <div class="photo">
+                    <img src="img11.jpg" alt="Momen 8">
+                    <div class="message">Akuu beruntuungg bangettt biisaa milikiinn ceweeekuu aneliaaa sayanggg</div>
+                </div>
+                <div class="photo">
+                    <img src="img16.jpg" alt="Momen 9">
+                    <div class="message">Mungkinn akuu punyaa salahh ke kamuu sayangg maaf yaa jika aku ga sempurna buatt anell. Akuu mau buat anellku senangg</div>
+                </div>
+                <div class="photo">
+                    <img src="img15.jpg" alt="Momen 10">
+                    <div class="message">Akuu tau aku bukan orang yang paling sempurnaa, mungkin bahkan jauh dari kata layak. Tapi aku bener-bener bersyukur, bangettt, karena kamu masih mau ada di sini, sama aku.</div>
+                </div>
+                <div class="photo">
+                    <img src="img13.jpg" alt="Momen 11">
+                    <div class="message">Kaadang aku takuttt, takut kamu capekkk, takut kamu nemu yang lebih baikk dari akunyaa. Tapi aku juga sadar, cinta itu bukan soal nahann, tetapi soal memperjuangkan. Dan aku siap terus berjuang, buat aaneellku. Karena kalau disuruh milih ulang, aku akan tetap pilih anelia—meski aku tahu kamu jauh di atas aku..</div>
+                </div>
+                <div class="photo">
+                    <img src="img14.jpg" alt="Momen 12">
+                    <div class="message">Akuu nggak janji hidup kitaa selalu indah, tapi aku janjii aku nggak akan ninggalin kamu sendirian di tengah badai. Aku mungkin bukan payung yang mahal, tapi aku akan jadi yang selalu terbuka pas kamu butuh perlindunganku.</div>
+                </div>
+                <div class="photo">
+                    <img src="img17.jpg" alt="Momen 13">
+                    <div class="message">Akuu ga sempurnaa ituu bangett sayangg, aku laki-laki yang ga bisa sesuai dengan ekspetasi dan kemauanmu tapi jika kamu menerima aku yang seperti ini aku sangat bersyukur sayangg dan aku akan usahainn semampu dan setulus aku</div>
+                </div>
+                <div class="photo">
+                    <img src="img18.jpg" alt="Momen 14">
+                    <div class="message">Aku tau aku nggak selalu bisa jadi orang yang kamu harapkan. Kadang aku nyebelin, kadang egois, dan kadang nggak peka. Tapi aku minta maaf kalau semua itu pernah bikin kamu ngerasa sendiri… karena sebenernya, aku nggak pernah mau kamu ngerasa gitu.</div>
+                </div>
+
+                <div class="photo">
+                    <img src="img12.jpg" alt="Momen 15">
+                    <div class="message"> Kamu itu terlalu baik buat aku, kadang aku sampe mikir… apa aku bener-bener pantas dapetin kamu? Tapi satu hal yang aku tau, aku bakal jagain kamu sebaik-baiknya, karena aku sadar, kamu itu hal yang paling berharga yang pernah aku punya..</div>
+                </div>
+
+                <div class="photo">
+                    <img src="img5.jpg" alt="Momen 16">
+                    <div class="message">Terimaaa kasiihhh banyakkk yaa sayangg🤍🤍🤍 karena kamu nggak cuma hadir, tapi juga bertahan. Karena kamu nggak cuma bilang sayang, tapi juga nunjukkin dengan sabar. Aku nggak akan pernah anggap itu hal kecil. Buat aku, kamu itu bukti kalau cinta tulus itu nyata. Dan aku bersyukur, kamu percaya sama aku farellmuu💕💕.</div>
+                </div>
+               
+            </div>
+</div>
+            `;
+        }
+     
+        setInterval(createHeart, 300);
+ 
+    </script>
+
+</body>
+
+</html>
